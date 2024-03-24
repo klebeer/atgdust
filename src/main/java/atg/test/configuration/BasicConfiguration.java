@@ -8,13 +8,14 @@ import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import atg.xml.tools.XMLToolsFactoryImpl;
 import org.apache.log4j.Logger;
 
 import atg.nucleus.Nucleus;
 import atg.nucleus.logging.PrintStreamLogger;
 import atg.service.lockmanager.ClientLockManager;
 import atg.test.util.FileUtil;
-import atg.xml.tools.apache.ApacheXMLToolsFactory;
+
 
 /**
  * <i>This class is a merger of atg.test.util.DBUtils and
@@ -25,9 +26,9 @@ import atg.xml.tools.apache.ApacheXMLToolsFactory;
  * This class will created all properties files needed for non repository based
  * tests.
  * </p>
- * 
+ *
  * @author robert
- * 
+ *
  */
 public final class BasicConfiguration {
 
@@ -42,7 +43,7 @@ public final class BasicConfiguration {
   }
 
   /**
-   * 
+   *
    * @param isDebug
    */
   public BasicConfiguration() {
@@ -50,7 +51,7 @@ public final class BasicConfiguration {
   }
 
   /**
-   * 
+   *
    * @param root
    * @throws IOException
    */
@@ -68,7 +69,7 @@ public final class BasicConfiguration {
   }
 
   /**
-   * 
+   *
    * @param root
    * @throws IOException
    */
@@ -83,7 +84,7 @@ public final class BasicConfiguration {
   }
 
   /**
-   * 
+   *
    * @param root
    * @throws IOException
    */
@@ -97,10 +98,10 @@ public final class BasicConfiguration {
   }
 
   /**
-   * 
+   *
    * Creates initial services properties like Initial, AppServerConfig, Nucleus,
    * etc, etc.
-   * 
+   *
    * @param root
    * @throws IOException
    */
@@ -111,7 +112,7 @@ public final class BasicConfiguration {
   }
 
   /**
-   * 
+   *
    * @param root
    * @throws IOException
    */
@@ -125,14 +126,14 @@ public final class BasicConfiguration {
   }
 
   /**
-   * 
+   *
    * @param root
    * @throws IOException
    */
   private void createXMLToolsFactory(final File root) throws IOException {
     FileUtil.createPropertyFile("XMLToolsFactory", new File(root
         .getAbsolutePath()
-        + "/atg/dynamo/service/xml"), ApacheXMLToolsFactory.class,
+        + "/atg/dynamo/service/xml/"), XMLToolsFactoryImpl.class,
         new HashMap<String, String>());
   }
 
