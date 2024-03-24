@@ -13,20 +13,6 @@
  */
 package atg.adapter.gsa;
 
-import java.beans.PropertyEditor;
-import java.io.File;
-import java.net.URL;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Properties;
-import java.util.Random;
-
-import junit.framework.TestCase;
-
-import org.apache.log4j.Logger;
-
 import atg.beans.DynamicPropertyDescriptor;
 import atg.core.util.StringUtils;
 import atg.nucleus.Nucleus;
@@ -37,6 +23,17 @@ import atg.repository.RepositoryPropertyDescriptor;
 import atg.service.idgen.IdGenerator;
 import atg.service.idgen.IdGeneratorException;
 import atg.test.util.DBUtils;
+import org.apache.log4j.Logger;
+
+import java.beans.PropertyEditor;
+import java.io.File;
+import java.net.URL;
+import java.sql.SQLException;
+import java.sql.Timestamp;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Properties;
+import java.util.Random;
 
 /**
  * A basic GSA test which is expected to be extended than used directly.
@@ -44,7 +41,7 @@ import atg.test.util.DBUtils;
  * @author adwivedi
  *
  */
-public  class GSATest extends TestCase {
+public class GSATest {
   
   private final transient Random random = new Random();
   
@@ -58,27 +55,9 @@ public  class GSATest extends TestCase {
     super();
     // TODO Auto-generated constructor stub
   }
-  /*
-   * @see TestCase#setUp()
-   */
-  protected void setUp() throws Exception {
-    super.setUp();
-  }
 
-  /*
-   * @see TestCase#tearDown()
-   */
-  protected void tearDown() throws Exception {
-    super.tearDown();
-  }
 
-  /**
-   * Constructor for GSATest.
-   * @param arg0
-   */
-  public GSATest(String arg0) {
-    super(arg0);
-  }
+
   public File getConfigpath() {
     return getConfigpath(null);
   }
@@ -126,7 +105,7 @@ public  class GSATest extends TestCase {
    * @throws Exception
    */
   protected void setUpAndTest(File pConfigPathWhereToCreateTheRepository, String[] definitionFiles, Properties pDBProperties, String pMethodName) throws Exception{
-    String repositoryComponentPath = "/"+getName()+"Repository";
+      String repositoryComponentPath = "/" + getClass().getName().replace('.', '/') + "Repository";
     GSATestUtils.getGSATestUtils().initializeMinimalConfigpath(pConfigPathWhereToCreateTheRepository,
         repositoryComponentPath, definitionFiles, pDBProperties, null, null, null, true);
     Nucleus n = startNucleus(pConfigPathWhereToCreateTheRepository);
@@ -158,7 +137,7 @@ public  class GSATest extends TestCase {
     File configPathWhereToCreateTheRepository = getConfigpath(null);
     String packageName = StringUtils.replace(this.getClass().getPackage()
         .getName(), '.', "/");
-    String fileName = packageName+"/"+getName()+"Repository.xml";
+      String fileName = packageName + "/" + getClass().getName().replace('.', '/') + "Repository.xml";
     URL defaultDefinitionFile = getClass().getResource("/"+fileName);
     if(defaultDefinitionFile == null )throw new AssertionError("DUDE, I need a file called : "+ fileName +" to start a GSA repository from. ");
     String[] definitionFiles = new String[]{fileName};
@@ -187,12 +166,13 @@ public  class GSATest extends TestCase {
     NucleusServlet.addNamingFactoriesAndProtocolHandlers();
     return Nucleus.startNucleus(new String[] {configpathStr});
   }
-  /**
-   * @param dbName
-   * @return
-   * @throws Exception
-   * @throws SQLException
-   */
+
+    /**
+     * @param props
+     * @return
+     * @throws Exception
+     * @throws SQLException
+     */
   protected DBUtils initDB(Properties props) throws Exception, SQLException {
     DBUtils db = new DBUtils(props.getProperty("URL"),props.getProperty("driver"),props.getProperty("user"),props.getProperty("password"));
     return db;

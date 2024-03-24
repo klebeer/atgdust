@@ -13,12 +13,6 @@
  */
 package test;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.Properties;
-
-import org.apache.log4j.Logger;
-
 import atg.adapter.gsa.GSARepository;
 import atg.adapter.gsa.GSATest;
 import atg.adapter.gsa.GSATestUtils;
@@ -29,6 +23,13 @@ import atg.repository.MutableRepositoryItem;
 import atg.repository.RepositoryItem;
 import atg.test.util.DBUtils;
 import atg.test.util.FileUtil;
+import org.apache.log4j.Logger;
+
+import java.io.File;
+import java.util.Arrays;
+import java.util.Properties;
+
+import static junit.framework.TestCase.assertNotNull;
 
 /**
  * This test starts a repository, adds an item to that repository, then shuts
