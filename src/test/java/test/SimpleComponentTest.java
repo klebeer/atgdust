@@ -14,11 +14,14 @@
 
 package test;
 
+import atg.test.AtgDustCase;
+import com.mycompany.SimpleComponent;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.io.File;
 
-import atg.test.AtgDustCase;
-
-import com.mycompany.SimpleComponent;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * 
@@ -34,10 +37,11 @@ public class SimpleComponentTest extends AtgDustCase {
 
   private SimpleComponent simpleComponent;
 
-  protected void setUp() throws Exception {
-    super.setUp();
+    @Before
+    public void setUp() throws Exception {
 
-    // The different exclude pattern (.svn, CVS) is needed in
+
+        // The different exclude pattern (.svn, CVS) is needed in
     // here because some other tests in this package (SimpleRepositoryTest)
     // don't use
     // AtgDusCase and therefore bypass the whole optimized property copying
@@ -58,6 +62,7 @@ public class SimpleComponentTest extends AtgDustCase {
    * Can it handle a non globally scoped component?
    * 
    */
+  @Test
   public void testSimpleComponent() {
     assertNotNull(simpleComponent);
   }
@@ -67,6 +72,7 @@ public class SimpleComponentTest extends AtgDustCase {
    * they are still the same" ?
    * 
    */
+  @Test
   public void testSimpleComponentAgain() {
     assertNotNull(simpleComponent);
   }

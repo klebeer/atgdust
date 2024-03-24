@@ -1,5 +1,16 @@
 package atg.test;
 
+import atg.nucleus.GenericService;
+import atg.nucleus.Nucleus;
+import atg.nucleus.logging.ClassLoggingFactory;
+import atg.nucleus.logging.ConsoleLogListener;
+import atg.test.configuration.BasicConfiguration;
+import atg.test.configuration.RepositoryConfiguration;
+import atg.test.util.FileUtil;
+import atg.test.util.RepositoryManager;
+import org.apache.commons.io.FileUtils;
+import org.apache.log4j.Logger;
+
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Method;
@@ -10,22 +21,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Properties;
 import java.util.Map.Entry;
-
-import junit.framework.TestCase;
-
-import org.apache.commons.io.FileUtils;
-import org.apache.log4j.Logger;
-
-import atg.nucleus.GenericService;
-import atg.nucleus.Nucleus;
-import atg.nucleus.logging.ClassLoggingFactory;
-import atg.nucleus.logging.ConsoleLogListener;
-import atg.test.configuration.BasicConfiguration;
-import atg.test.configuration.RepositoryConfiguration;
-import atg.test.util.FileUtil;
-import atg.test.util.RepositoryManager;
+import java.util.Properties;
 
 /**
  * Replacement base class for {@link AtgDustTestCase}. Extend this class and use
@@ -82,7 +79,7 @@ import atg.test.util.RepositoryManager;
  * @author robert
  */
 @SuppressWarnings("unchecked")
-public class AtgDustCase extends TestCase {
+public class AtgDustCase {
 
 	private static final Logger log = Logger.getLogger(AtgDustCase.class);
 	private RepositoryManager repositoryManager = new RepositoryManager();
@@ -379,14 +376,8 @@ public class AtgDustCase extends TestCase {
 		}
 	}
 
-	/**
-	 * Always make sure to call this because it will do necessary clean up
-	 * actions (shutting down in-memory database (if it was used) and the
-	 * nucleus) so he next test can run safely.
-	 */
-	@Override
-	protected void tearDown() throws Exception {
-		super.tearDown();
+
+    protected void tearDown() throws Exception {
 		if (repositoryManager != null) {
 			repositoryManager.shutdownInMemoryDbAndCloseConnections();
 		}

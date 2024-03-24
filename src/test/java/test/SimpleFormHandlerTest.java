@@ -1,23 +1,25 @@
 
 package test;
 
+import atg.servlet.ServletTestUtils;
+import atg.servlet.ServletTestUtils.TestingDynamoHttpServletRequest;
+import atg.servlet.ServletTestUtils.TestingDynamoHttpServletResponse;
+import atg.test.AtgDustCase;
+import org.junit.Before;
+import org.junit.Test;
+
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
-import atg.servlet.ServletTestUtils;
-import atg.servlet.ServletTestUtils.TestingDynamoHttpServletRequest;
-import atg.servlet.ServletTestUtils.TestingDynamoHttpServletResponse;
-
-
-import atg.test.AtgDustCase;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 
 public class SimpleFormHandlerTest extends AtgDustCase {
     private ServletTestUtils mServletTestUtils;
 
-    @Override
-    protected void setUp() throws Exception {
-        super.setUp();
+    @Before
+    public void setUp() throws Exception {
         // We can reuse this instance for all tests
         if (mServletTestUtils == null)
             mServletTestUtils = new ServletTestUtils();
@@ -30,7 +32,8 @@ public class SimpleFormHandlerTest extends AtgDustCase {
                         + "/config".replace("/", File.separator),
                 ".svn");
     }
-    
+
+    @Test
     public void testSimpleFormHandler() throws Exception {
         SimpleFormHandler simpleFormHandler = (SimpleFormHandler) resolveNucleusComponent("/atg/test/SimpleFormHandler");
         assertNotNull(simpleFormHandler);

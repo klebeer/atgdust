@@ -13,13 +13,6 @@
  */
 package test;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.util.Properties;
-
-import org.apache.log4j.Logger;
-
 import atg.adapter.gsa.GSARepository;
 import atg.dtm.TransactionDemarcation;
 import atg.dtm.TransactionDemarcationException;
@@ -27,6 +20,18 @@ import atg.repository.MutableRepositoryItem;
 import atg.repository.RepositoryException;
 import atg.repository.RepositoryItem;
 import atg.test.AtgDustCase;
+import org.apache.log4j.Logger;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Properties;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 /**
  * 
@@ -45,9 +50,9 @@ public class SongsRepositoryTest extends AtgDustCase {
 	@SuppressWarnings("unused")
 	private static Logger log = Logger.getLogger(SongsRepositoryTest.class);
 
-	@Override
+    @Before
 	public void setUp() throws Exception {
-		super.setUp();
+
 
 		// make sure all needed files are at the configuration location.
 		// "target/test-classes/config" is then promoted to the configuration
@@ -64,7 +69,7 @@ public class SongsRepositoryTest extends AtgDustCase {
 
 	}
 
-	@Override
+    @After
 	public void tearDown() throws Exception {
 		super.tearDown();
 	}
@@ -74,7 +79,8 @@ public class SongsRepositoryTest extends AtgDustCase {
 	 * 
 	 * @throws Exception
 	 */
-	public void testWithInMemoryDb() throws Exception {
+    @Test
+    public void testWithInMemoryDb() throws Exception {
 
 		// The actual test is quite generic. The only difference is the way the
 		// repository is prepared by the prepareRepositoryTest method
