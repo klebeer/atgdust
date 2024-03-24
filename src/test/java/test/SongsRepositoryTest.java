@@ -105,7 +105,8 @@ public class SongsRepositoryTest extends AtgDustCase {
 	 * 
 	 * @throws Exception
 	 */
-	public void testWithExistingDb() throws Exception {
+	@Test
+    public void testWithExistingDb() throws Exception {
 
 		Properties properties = new Properties();
 		properties
